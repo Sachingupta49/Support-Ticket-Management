@@ -68,4 +68,14 @@ public class TicketsController : ControllerBase
         var ticket = await _ticketService.UpdateTicketAsync(id, request, cancellationToken);
         return Ok(ticket);
     }
+
+    [HttpPatch("{id:int}/status")]
+    public async Task<ActionResult<TicketDto>> ChangeStatus(
+        int id,
+        [FromBody] UpdateTicketStatusRequest request,
+        CancellationToken cancellationToken)
+    {
+        var ticket = await _ticketService.ChangeStatusAsync(id, request, cancellationToken);
+        return Ok(ticket);
+    }
 }

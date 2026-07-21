@@ -15,6 +15,7 @@ public static class DependencyInjection
         services.AddScoped<ICommentService, CommentService>();
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IDashboardService, DashboardService>();
+        services.AddSingleton<IStatusTransitionValidator, StatusTransitionValidator>();
 
         services.AddValidatorsFromAssemblyContaining<CreateTicketRequestValidator>();
 

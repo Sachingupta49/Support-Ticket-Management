@@ -15,15 +15,21 @@ public class TicketService : ITicketService
     private readonly IApplicationDbContext _context;
     private readonly IValidator<CreateTicketRequest> _createValidator;
     private readonly IValidator<UpdateTicketRequest> _updateValidator;
+    private readonly IValidator<UpdateTicketStatusRequest> _statusValidator;
+    private readonly IStatusTransitionValidator _statusTransitionValidator;
 
     public TicketService(
         IApplicationDbContext context,
         IValidator<CreateTicketRequest> createValidator,
-        IValidator<UpdateTicketRequest> updateValidator)
+        IValidator<UpdateTicketRequest> updateValidator,
+        IValidator<UpdateTicketStatusRequest> statusValidator,
+        IStatusTransitionValidator statusTransitionValidator)
     {
         _context = context;
         _createValidator = createValidator;
         _updateValidator = updateValidator;
+        _statusValidator = statusValidator;
+        _statusTransitionValidator = statusTransitionValidator;
     }
 
     public async Task<IReadOnlyList<TicketDto>> GetTicketsAsync(
@@ -116,6 +122,36 @@ public class TicketService : ITicketService
         ticket.Description = request.Description.Trim();
         ticket.Priority = EntityMappings.ParsePriority(request.Priority);
         ticket.AssigneeId = request.AssigneeId;
+        ticket.UpdatedAt = DateTime.UtcNow;
+
+        await _context.SaveChangesAsync(cancellationToken);
+
+        var updated = await _context.Tickets
+            .Include(t => t.Assignee)
+            .FirstAsync(t => t.Id == id, cancellationToken);
+
+        return updated.ToDto();
+    }
+
+    public async Task<TicketDto> ChangeStatusAsync(
+        int id,
+        UpdateTicketStatusRequest request,
+        CancellationToken cancellationToken = default)
+    {
+        await ValidationHelper.ValidateAsync(_statusValidator, request, cancellationToken);
+
+        var ticket = await _context.Tickets
+            .FirstOrDefaultAsync(t => t.Id == id, cancellationToken);
+
+        if (ticket is null)
+        {
+            throw new NotFoundException("Ticket", id);
+        }
+
+        var newStatus = EntityMappings.ParseStatus(request.Status)!.Value;
+        _statusTransitionValidator.Validate(ticket.Status, newStatus);
+
+        ticket.Status = newStatus;
         ticket.UpdatedAt = DateTime.UtcNow;
 
         await _context.SaveChangesAsync(cancellationToken);

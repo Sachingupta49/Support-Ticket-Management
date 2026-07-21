@@ -9,4 +9,5 @@ public interface ITicketService
     Task<TicketDto> GetTicketByIdAsync(int id, CancellationToken cancellationToken = default);
     Task<TicketDto> CreateTicketAsync(CreateTicketRequest request, CancellationToken cancellationToken = default);
     Task<TicketDto> UpdateTicketAsync(int id, UpdateTicketRequest request, CancellationToken cancellationToken = default);
+    Task<TicketDto> ChangeStatusAsync(int id, UpdateTicketStatusRequest request, CancellationToken cancellationToken = default);
 }

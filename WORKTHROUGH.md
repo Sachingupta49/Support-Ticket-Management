@@ -9,8 +9,8 @@ This document tracks execution of the [Support Ticket Assessment Execution Plan]
 | 1 | Planning | ✅ Complete | `a5abbd3` | ✅ Confirmed |
 | 2 | Backend Foundation | ✅ Complete | `6749a01` | ✅ Confirmed |
 | 3 | Database | ✅ Complete | `1cea6ad` | ✅ Confirmed |
-| 4 | Backend Features | ✅ Complete | `5900119` | ⏳ Awaiting |
-| 5 | State Machine | ⬜ Not started | — | — |
+| 4 | Backend Features | ✅ Complete | `5900119` | ✅ Confirmed |
+| 5 | State Machine | ✅ Complete | Pending | ⏳ Awaiting |
 | 6 | Frontend | ⬜ Not started | — | — |
 | 7 | Integration | ⬜ Not started | — | — |
 | 8 | Testing | ⬜ Not started | — | — |
@@ -25,7 +25,7 @@ This document tracks execution of the [Support Ticket Assessment Execution Plan]
 | 2 | Backend Setup | Phase 2 | ✅ `6749a01` |
 | 3 | Database Setup | Phase 3 | ✅ `1cea6ad` |
 | 4 | Ticket APIs | Phase 4 | ✅ `5900119` |
-| 5 | State Machine | Phase 5 | — |
+| 5 | State Machine | Phase 5 | Pending |
 | 6 | Frontend UI | Phase 6 | — |
 | 7 | Frontend Integration | Phase 7 | — |
 | 8 | Tests | Phase 8 | — |
@@ -237,7 +237,7 @@ Applied successfully to `(localdb)\mssqllocaldb` → `SupportTicketDb`
 
 ### Deferred to Phase 5
 
-- `PATCH /api/tickets/{id}/status` — state machine transitions
+- ~~`PATCH /api/tickets/{id}/status` — state machine transitions~~ ✅ Implemented in Phase 5
 
 ### Build Result
 
@@ -265,13 +265,52 @@ Build succeeded. 0 Warning(s), 0 Error(s)
 
 ## Phase 5 — State Machine
 
-*Not started — awaiting Phase 4 confirmation.*
+**Objective:** Enforce strict ticket status transitions via `PATCH /api/tickets/{id}/status`.
+
+**Agent role:** Backend Agent
+
+**Dependency:** Phase 4
+
+### Deliverables Created
+
+| Item | Details |
+|------|---------|
+| `StatusTransitionValidator` | Centralized transition rules |
+| `UpdateTicketStatusRequest` | DTO + FluentValidation |
+| `ChangeStatusAsync` | Service method on TicketService |
+| `PATCH /api/tickets/{id}/status` | Controller endpoint |
+
+### Allowed Transitions
+
+| From | Allowed Next |
+|------|-------------|
+| Open | InProgress, Cancelled |
+| InProgress | Resolved, Cancelled |
+| Resolved | Closed |
+| Closed | (none) |
+| Cancelled | (none) |
+
+### Swagger UI
+
+Run the API and open: **http://localhost:5172/swagger**
+
+### Completion Checklist
+
+- [x] StatusTransitionValidator implemented
+- [x] PATCH status endpoint added
+- [x] Invalid transitions return 400 with detail message
+- [x] Valid transitions update status and UpdatedAt
+- [x] Solution builds successfully
+- [ ] Git commit created
+- [ ] Pushed to GitHub
+- [ ] User tested via Swagger
+- [ ] User confirmation received
 
 ---
 
 ## Phase 6 — Frontend
 
-*Not started.*
+*Not started — awaiting Phase 5 confirmation after Swagger testing.*
 
 ---
 
