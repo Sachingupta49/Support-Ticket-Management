@@ -1,0 +1,48 @@
+# Binaries
+bin/
+obj/
+out/
+dist/
+build/
+
+# .NET
+*.user
+*.suo
+.vs/
+*.DotSettings.user
+
+# Node
+node_modules/
+*.local
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# IDE
+.idea/
+*.swp
+*.swo
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Test results
+TestResults/
+coverage/
+*.coverage
+
+# Logs
+*.log
+logs/
+
+# Database
+*.db
+*.mdf
+*.ldf
+
+# Secrets
+appsettings.Development.json
+!appsettings.Development.json.example
