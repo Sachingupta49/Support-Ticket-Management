@@ -8,8 +8,8 @@ This document tracks execution of the [Support Ticket Assessment Execution Plan]
 |-------|------|--------|--------|-----------|
 | 1 | Planning | ✅ Complete | `a5abbd3` | ✅ Confirmed |
 | 2 | Backend Foundation | ✅ Complete | `6749a01` | ✅ Confirmed |
-| 3 | Database | ✅ Complete | `1cea6ad` | ⏳ Awaiting |
-| 4 | Backend Features | ⬜ Not started | — | — |
+| 3 | Database | ✅ Complete | `1cea6ad` | ✅ Confirmed |
+| 4 | Backend Features | ✅ Complete | Pending | ⏳ Awaiting |
 | 5 | State Machine | ⬜ Not started | — | — |
 | 6 | Frontend | ⬜ Not started | — | — |
 | 7 | Integration | ⬜ Not started | — | — |
@@ -24,7 +24,7 @@ This document tracks execution of the [Support Ticket Assessment Execution Plan]
 | 1 | Initial Planning | Phase 1 | ✅ `a5abbd3` |
 | 2 | Backend Setup | Phase 2 | ✅ `6749a01` |
 | 3 | Database Setup | Phase 3 | ✅ `1cea6ad` |
-| 4 | Ticket APIs | Phase 4 | — |
+| 4 | Ticket APIs | Phase 4 | Pending |
 | 5 | State Machine | Phase 5 | — |
 | 6 | Frontend UI | Phase 6 | — |
 | 7 | Frontend Integration | Phase 7 | — |
@@ -206,13 +206,66 @@ Applied successfully to `(localdb)\mssqllocaldb` → `SupportTicketDb`
 
 ## Phase 4 — Backend Features
 
-*Not started.*
+**Objective:** Ticket CRUD, comment APIs, search, status filter, validation, and error handling.
+
+**Agent role:** Backend Agent
+
+**Dependency:** Phase 3
+
+### Deliverables Created
+
+| Item | Details |
+|------|---------|
+| DTOs | TicketDto, CommentDto, UserDto, DashboardSummaryDto, request models |
+| Validators | CreateTicket, UpdateTicket, CreateComment (FluentValidation) |
+| Services | TicketService, CommentService, UserService, DashboardService |
+| Controllers | TicketsController, CommentsController, UsersController, DashboardController |
+| Exception handling | AppValidationException with field-level errors in middleware |
+
+### API Endpoints
+
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/api/tickets` | List with `?search=` and `?status=` |
+| GET | `/api/tickets/{id}` | Get ticket by ID |
+| POST | `/api/tickets` | Create ticket (status = Open) |
+| PUT | `/api/tickets/{id}` | Update ticket metadata |
+| GET | `/api/tickets/{id}/comments` | List comments (chronological) |
+| POST | `/api/tickets/{id}/comments` | Add comment |
+| GET | `/api/users` | List users for assignee dropdown |
+| GET | `/api/dashboard/summary` | Ticket counts by status + recent tickets |
+
+### Deferred to Phase 5
+
+- `PATCH /api/tickets/{id}/status` — state machine transitions
+
+### Build Result
+
+```
+Build succeeded. 0 Warning(s), 0 Error(s)
+```
+
+### Completion Checklist
+
+- [x] Ticket list with search and status filter
+- [x] Ticket get by ID
+- [x] Ticket create with validation
+- [x] Ticket update (metadata only)
+- [x] Comment list and create
+- [x] User list endpoint
+- [x] Dashboard summary endpoint
+- [x] FluentValidation on write endpoints
+- [x] Validation errors return field-level details
+- [x] Solution builds successfully
+- [ ] Git commit created
+- [ ] Pushed to GitHub
+- [ ] User confirmation received
 
 ---
 
 ## Phase 5 — State Machine
 
-*Not started.*
+*Not started — awaiting Phase 4 confirmation.*
 
 ---
 

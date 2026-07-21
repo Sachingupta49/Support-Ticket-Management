@@ -1,5 +1,6 @@
 using System.Net;
 using System.Text.Json;
+using SupportTicket.Application.Exceptions;
 using SupportTicket.Domain.Exceptions;
 
 namespace SupportTicket.API.Middleware;
@@ -29,12 +30,13 @@ public class ExceptionHandlingMiddleware
 
     private async Task HandleExceptionAsync(HttpContext context, Exception exception)
     {
-        var (statusCode, title, detail) = exception switch
+        var (statusCode, title, detail, errors) = exception switch
         {
-            NotFoundException notFound => (HttpStatusCode.NotFound, "Not Found", notFound.Message),
-            InvalidStatusTransitionException transition => (HttpStatusCode.BadRequest, "Invalid status transition", transition.Message),
-            ArgumentException argument => (HttpStatusCode.BadRequest, "Bad Request", argument.Message),
-            _ => (HttpStatusCode.InternalServerError, "An unexpected error occurred", "An internal server error occurred.")
+            NotFoundException notFound => (HttpStatusCode.NotFound, "Not Found", notFound.Message, null),
+            InvalidStatusTransitionException transition => (HttpStatusCode.BadRequest, "Invalid status transition", transition.Message, null),
+            AppValidationException validation => (HttpStatusCode.BadRequest, "One or more validation errors occurred.", "One or more validation errors occurred.", validation.Errors),
+            ArgumentException argument => (HttpStatusCode.BadRequest, "Bad Request", argument.Message, null),
+            _ => (HttpStatusCode.InternalServerError, "An unexpected error occurred", "An internal server error occurred.", null)
         };
 
         if (statusCode == HttpStatusCode.InternalServerError)
@@ -49,13 +51,18 @@ public class ExceptionHandlingMiddleware
         context.Response.ContentType = "application/problem+json";
         context.Response.StatusCode = (int)statusCode;
 
-        var problem = new
+        var problem = new Dictionary<string, object?>
         {
-            type = $"https://tools.ietf.org/html/rfc7231#section-{(int)statusCode / 100}.{(int)statusCode % 100}",
-            title,
-            status = (int)statusCode,
-            detail
+            ["type"] = $"https://tools.ietf.org/html/rfc7231#section-{(int)statusCode / 100}.{(int)statusCode % 100}",
+            ["title"] = title,
+            ["status"] = (int)statusCode,
+            ["detail"] = detail
         };
+
+        if (errors is not null)
+        {
+            problem["errors"] = errors;
+        }
 
         await context.Response.WriteAsync(JsonSerializer.Serialize(problem));
     }
