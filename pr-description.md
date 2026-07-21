@@ -2,11 +2,11 @@
 
 ## Title
 
-`feat: Support Ticket Management System — Full Stack Assessment`
+`feat: Support Ticket Management System — Final Submission`
 
 ## Summary
 
-This PR delivers a complete Support Ticket Management System built as a practical assessment project. It includes a .NET 8 Clean Architecture backend, SQL Server database with seed data, a React + TypeScript frontend, and 70 passing automated tests.
+Final submission of the Support Ticket Management System practical assessment. Delivers a production-quality assessment codebase with .NET 8 Clean Architecture backend, React frontend, SQL Server database, 70 passing tests, and complete documentation.
 
 ## What's Included
 
@@ -23,23 +23,24 @@ This PR delivers a complete Support Ticket Management System built as a practica
 - Dashboard with status summary cards and recent tickets
 - Ticket list with debounced search and status filter
 - Create, edit, and detail pages with comments and status transitions
-- Polished UI with single global "New Ticket" CTA
+- Polished UI (Inter font, panel layout, single global CTA)
 - API health banner and user-friendly error display
 
 ### Tests
 - 39 unit tests (validators, state machine)
 - 31 integration tests (full API via HTTP)
-- All acceptance criteria AC-1–35 verified
+- **70/70 passing**
 
 ### Documentation
-- Requirements, design, API contract, data model
-- Test strategy, results, debugging notes
-- Code review, reflection, AI usage summary
-- Phase-by-phase prompt history
+- Full assessment documentation suite (requirements through reflection)
+- AI prompt history for all 10 phases
+- Final submission checklist
+- Complete README with setup, config, and troubleshooting
 
 ## Test Plan
 
 - [x] `dotnet test src/SupportTicket.sln` — 70/70 passing
+- [x] `dotnet ef database update` — migrations apply cleanly
 - [x] API health check at `GET /api/health`
 - [x] Swagger UI loads at `/swagger`
 - [x] Dashboard shows ticket counts by status
@@ -49,20 +50,30 @@ This PR delivers a complete Support Ticket Management System built as a practica
 - [x] Status transitions follow state machine rules
 - [x] Comments can be added and viewed
 - [x] Invalid transitions show error messages
-- [x] No duplicate Create Ticket buttons in UI
+- [x] No secrets in repository
+- [x] All acceptance criteria AC-1–38 verified
 
 ## Setup
 
 ```bash
-# Backend
+git clone https://github.com/Sachingupta49/Support-Ticket-Management.git
+cd Support-Ticket-Management
+
+dotnet ef database update \
+  --project src/SupportTicket.Infrastructure/SupportTicket.Infrastructure.csproj \
+  --startup-project src/SupportTicket.API/SupportTicket.API.csproj
+
 dotnet run --project src/SupportTicket.API/SupportTicket.API.csproj --launch-profile http
 
-# Frontend
 cd frontend && npm install && npm run dev
 ```
 
 - API: http://localhost:5172
 - UI: http://localhost:5173
+
+## Candidate
+
+**Sachin Gupta** — https://github.com/Sachingupta49/Support-Ticket-Management
 
 ## Notes
 
