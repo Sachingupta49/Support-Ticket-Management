@@ -443,6 +443,40 @@ textarea {
   font-size: 0.875rem;
 }
 
+.api-status-banner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.75rem 1.5rem 0;
+}
+
+.flash-message {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+}
+
+.flash-info {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1e40af;
+}
+
+.flash-success {
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #065f46;
+}
+
+.flash-error {
+  background: var(--color-error-bg);
+  border: 1px solid var(--color-error-border);
+  color: var(--color-error-text);
+}
+
 @media (max-width: 640px) {
   .form-row {
     grid-template-columns: 1fr;

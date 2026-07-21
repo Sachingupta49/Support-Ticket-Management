@@ -1,4 +1,5 @@
 import { Link, Outlet } from 'react-router-dom';
+import { ApiStatusBanner } from './ApiStatusBanner';
 
 export function Layout() {
   return (
@@ -17,6 +18,7 @@ export function Layout() {
           </nav>
         </div>
       </header>
+      <ApiStatusBanner />
       <main className="app-main">
         <Outlet />
       </main>

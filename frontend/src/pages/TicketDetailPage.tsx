@@ -26,6 +26,7 @@ export function TicketDetailPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [statusError, setStatusError] = useState('');
+  const [commentError, setCommentError] = useState('');
   const [commentFieldErrors, setCommentFieldErrors] = useState<Record<string, string[]>>();
   const [statusChanging, setStatusChanging] = useState(false);
 
@@ -69,6 +70,7 @@ export function TicketDetailPage() {
   };
 
   const handleAddComment = async (authorId: number, body: string) => {
+    setCommentError('');
     setCommentFieldErrors(undefined);
     try {
       const comment = await createComment(ticketId, { authorId, body });
@@ -76,8 +78,10 @@ export function TicketDetailPage() {
     } catch (err) {
       if (err instanceof ApiClientError) {
         setCommentFieldErrors(err.errors);
+        setCommentError(err.errors ? '' : err.message);
         throw err;
       }
+      setCommentError('Unable to post comment. Please try again.');
       throw err;
     }
   };
@@ -126,6 +130,9 @@ export function TicketDetailPage() {
 
       <section className="section card">
         <h2>Comments</h2>
+        {commentError && (
+          <ErrorAlert message={commentError} onDismiss={() => setCommentError('')} />
+        )}
         <CommentList comments={comments} />
         <CommentForm
           users={users}

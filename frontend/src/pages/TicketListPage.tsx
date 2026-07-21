@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { getTickets } from '../api/tickets';
 import { ApiClientError } from '../api/client';
 import type { Ticket, TicketStatus } from '../types';
 import { ErrorAlert } from '../components/ErrorAlert';
+import { FlashMessage } from '../components/FlashMessage';
 import { LoadingSpinner } from '../components/LoadingSpinner';
 import { TicketTable } from '../components/TicketTable';
 import { useDebounce } from '../hooks/useDebounce';
@@ -19,7 +20,11 @@ const statusOptions: { value: string; label: string }[] = [
 
 export function TicketListPage() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
+  const [flashMessage, setFlashMessage] = useState(
+    (location.state as { message?: string } | null)?.message ?? '',
+  );
   const [search, setSearch] = useState(searchParams.get('search') ?? '');
   const [status, setStatus] = useState(searchParams.get('status') ?? '');
   const debouncedSearch = useDebounce(search, 300);
@@ -36,6 +41,7 @@ export function TicketListPage() {
 
   useEffect(() => {
     setLoading(true);
+    setError('');
     getTickets(debouncedSearch || undefined, status || undefined)
       .then(setTickets)
       .catch((err) => {
@@ -70,6 +76,9 @@ export function TicketListPage() {
         </select>
       </div>
 
+      {flashMessage && (
+        <FlashMessage message={flashMessage} variant="error" onDismiss={() => setFlashMessage('')} />
+      )}
       {error && <ErrorAlert message={error} onDismiss={() => setError('')} />}
       {loading ? (
         <LoadingSpinner />

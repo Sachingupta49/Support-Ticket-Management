@@ -12,8 +12,8 @@ This document tracks execution of the [Support Ticket Assessment Execution Plan]
 | 4 | Backend Features | ✅ Complete | `5900119` | ✅ Confirmed |
 | 5 | State Machine | ✅ Complete | `0871e72` | ✅ Confirmed |
 | — | Backend Tests (pre-frontend) | ✅ Complete | `73a571a` | ⏳ Awaiting |
-| 6 | Frontend | ✅ Complete | `f44546f` | ⏳ Awaiting |
-| 7 | Integration | ⬜ Not started | — | — |
+| 6 | Frontend | ✅ Complete | `f44546f` | ✅ Confirmed |
+| 7 | Integration | ✅ Complete | Pending | ⏳ Awaiting |
 | 8 | Testing | ⬜ Not started | — | — |
 | 9 | Documentation | ⬜ Not started | — | — |
 | 10 | Finalization | ⬜ Not started | — | — |
@@ -29,7 +29,7 @@ This document tracks execution of the [Support Ticket Assessment Execution Plan]
 | 5 | State Machine | Phase 5 | ✅ `0871e72` |
 | — | Tests (pre-frontend) | — | ✅ `73a571a` |
 | 6 | Frontend UI | Phase 6 | ✅ `f44546f` |
-| 7 | Frontend Integration | Phase 7 | — |
+| 7 | Frontend Integration | Phase 7 | Pending |
 | 8 | Tests | Phase 8 | — |
 | 9 | Documentation | Phase 9 | — |
 | 10 | Final Submission | Phase 10 | — |
@@ -374,7 +374,67 @@ Requires API running: `dotnet run --project src/SupportTicket.API --launch-profi
 
 ## Phase 7 — Integration
 
-*Largely completed alongside Phase 6 — API wired to all pages. Formal verification pending.*
+**Objective:** Connect React to API with loading states, validation errors, and server error handling.
+
+**Agent role:** Frontend Agent
+
+**Dependency:** Phase 6
+
+### Pre-Phase Verification
+
+```
+Backend tests: 63/63 passing
+```
+
+### Integration Enhancements
+
+| Item | Details |
+|------|---------|
+| Network error handling | API client catches fetch failures |
+| `VITE_API_BASE_URL` | Configurable API base via `.env` |
+| `ApiStatusBanner` | Shows message when API is unreachable |
+| `FlashMessage` | Displays redirect messages (e.g. ticket not found) |
+| Error clearing | Errors reset on refetch |
+| Comment errors | General + field-level errors on detail page |
+
+### Integration Points
+
+| Frontend | Backend API |
+|----------|---------------|
+| Dashboard | `GET /api/dashboard/summary` |
+| Ticket list | `GET /api/tickets?search=&status=` |
+| Create ticket | `POST /api/tickets` |
+| Edit ticket | `PUT /api/tickets/{id}` |
+| Status change | `PATCH /api/tickets/{id}/status` |
+| Comments | `GET/POST /api/tickets/{id}/comments` |
+| User dropdowns | `GET /api/users` |
+| Health check | `GET /api/health` |
+
+### Verification
+
+See `integration-verification.md` for manual checklist.
+
+### Completion Checklist
+
+- [x] All pages wired to API endpoints
+- [x] Loading spinners during fetch
+- [x] Validation errors displayed inline
+- [x] Server errors shown via ErrorAlert
+- [x] Network failure message
+- [x] API offline banner
+- [x] 404 redirect with flash message
+- [x] Vite proxy configured
+- [x] CORS verified (API allows localhost:5173)
+- [x] Backend tests still passing (63/63)
+- [ ] Git commit created
+- [ ] Pushed to GitHub
+- [ ] User confirmation received
+
+---
+
+## Phase 8 — Testing
+
+*Backend tests complete (63/63). Formal documentation phase pending.*
 
 ---
 
@@ -420,18 +480,6 @@ dotnet test src/SupportTicket.sln
 - [x] Git commit created (`73a571a`)
 - [x] Pushed to GitHub
 - [ ] User confirmation received
-
----
-
-## Phase 7 — Integration
-
-*Not started.*
-
----
-
-## Phase 8 — Testing
-
-*Not started.*
 
 ---
 
