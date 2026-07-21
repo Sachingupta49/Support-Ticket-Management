@@ -426,8 +426,8 @@ See `integration-verification.md` for manual checklist.
 - [x] Vite proxy configured
 - [x] CORS verified (API allows localhost:5173)
 - [x] Backend tests still passing (63/63)
-- [ ] Git commit created
-- [ ] Pushed to GitHub
+- [x] Git commit created (`aeaa20c`)
+- [x] Pushed to GitHub
 - [ ] User confirmation received
 
 ---
