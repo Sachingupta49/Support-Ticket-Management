@@ -23,7 +23,8 @@ A full-stack support ticket management application built as a practical assessme
 |-------|--------|
 | Planning | ✅ Complete |
 | Backend Foundation | ✅ Complete |
-| Database | ⬜ Pending |
+| Database | ✅ Complete |
+| Backend Features | ⬜ Pending |
 | Backend Features | ⬜ Pending |
 | State Machine | ⬜ Pending |
 | Frontend | ⬜ Pending |
