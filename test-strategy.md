@@ -27,6 +27,7 @@ The backend uses a two-layer test approach: **unit tests** for isolated business
 | `StatusTransitionValidator` | Valid transitions, invalid transitions, same-status rejection |
 | `CreateTicketRequestValidator` | Title, priority, assignee validation |
 | `CreateCommentRequestValidator` | Body required, max length |
+| `UpdateTicketRequestValidator` | Title, priority validation |
 | `UpdateTicketStatusRequestValidator` | Valid/invalid status values |
 
 ## Integration Test Coverage
@@ -37,6 +38,7 @@ The backend uses a two-layer test approach: **unit tests** for isolated business
 | Search & Filter | `?search=`, `?status=`, combined |
 | Comments | List, create, ordering, 404, validation |
 | State Machine | All AC-14 through AC-22 transitions |
+| Edge Cases | 404 on update/status, invalid status query param |
 | Users & Dashboard | User list, dashboard summary, health check |
 
 ## Running Tests
