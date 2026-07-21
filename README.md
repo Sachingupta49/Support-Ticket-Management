@@ -26,6 +26,7 @@ A full-stack support ticket management application built as a practical assessme
 | Database | ✅ Complete |
 | Backend Features | ✅ Complete |
 | State Machine | ✅ Complete |
+| Backend Tests | ✅ Complete (63/63 passing) |
 | Frontend | ⬜ Pending |
 | Backend Features | ⬜ Pending |
 | State Machine | ⬜ Pending |

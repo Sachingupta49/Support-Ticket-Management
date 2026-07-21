@@ -10,7 +10,8 @@ This document tracks execution of the [Support Ticket Assessment Execution Plan]
 | 2 | Backend Foundation | ✅ Complete | `6749a01` | ✅ Confirmed |
 | 3 | Database | ✅ Complete | `1cea6ad` | ✅ Confirmed |
 | 4 | Backend Features | ✅ Complete | `5900119` | ✅ Confirmed |
-| 5 | State Machine | ✅ Complete | `0871e72` | ⏳ Awaiting |
+| 5 | State Machine | ✅ Complete | `0871e72` | ✅ Confirmed |
+| — | Backend Tests (pre-frontend) | ✅ Complete | Pending | ⏳ Awaiting |
 | 6 | Frontend | ⬜ Not started | — | — |
 | 7 | Integration | ⬜ Not started | — | — |
 | 8 | Testing | ⬜ Not started | — | — |
@@ -26,6 +27,7 @@ This document tracks execution of the [Support Ticket Assessment Execution Plan]
 | 3 | Database Setup | Phase 3 | ✅ `1cea6ad` |
 | 4 | Ticket APIs | Phase 4 | ✅ `5900119` |
 | 5 | State Machine | Phase 5 | ✅ `0871e72` |
+| — | Tests (pre-frontend) | — | Pending |
 | 6 | Frontend UI | Phase 6 | — |
 | 7 | Frontend Integration | Phase 7 | — |
 | 8 | Tests | Phase 8 | — |
@@ -310,7 +312,52 @@ Run the API and open: **http://localhost:5172/swagger**
 
 ## Phase 6 — Frontend
 
-*Not started — awaiting Phase 5 confirmation after Swagger testing.*
+*Not started — awaiting confirmation after backend tests.*
+
+---
+
+## Backend Tests (Pre-Frontend)
+
+**Objective:** Unit and integration tests for all API endpoints before React development.
+
+**Agent role:** QA Agent
+
+**Dependency:** Phases 4–5
+
+### Test Projects
+
+| Project | Tests | Coverage |
+|---------|-------|----------|
+| `SupportTicket.UnitTests` | 36 | Validators, state machine |
+| `SupportTicket.IntegrationTests` | 27 | Full API via HTTP |
+
+### Test Results
+
+```
+Total: 63 passed, 0 failed
+```
+
+See `test-strategy.md` and `test-results.md` for details.
+
+### Run Command
+
+```bash
+dotnet test src/SupportTicket.sln
+```
+
+### Completion Checklist
+
+- [x] Unit tests for StatusTransitionValidator
+- [x] Unit tests for FluentValidation validators
+- [x] Integration tests for ticket CRUD
+- [x] Integration tests for search and filter
+- [x] Integration tests for comments
+- [x] Integration tests for state machine (AC-14 to AC-22)
+- [x] Integration tests for users and dashboard
+- [x] All 63 tests passing
+- [ ] Git commit created
+- [ ] Pushed to GitHub
+- [ ] User confirmation received
 
 ---
 
