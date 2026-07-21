@@ -10,7 +10,7 @@ This document tracks execution of the [Support Ticket Assessment Execution Plan]
 | 2 | Backend Foundation | ✅ Complete | `6749a01` | ✅ Confirmed |
 | 3 | Database | ✅ Complete | `1cea6ad` | ✅ Confirmed |
 | 4 | Backend Features | ✅ Complete | `5900119` | ✅ Confirmed |
-| 5 | State Machine | ✅ Complete | Pending | ⏳ Awaiting |
+| 5 | State Machine | ✅ Complete | `0871e72` | ⏳ Awaiting |
 | 6 | Frontend | ⬜ Not started | — | — |
 | 7 | Integration | ⬜ Not started | — | — |
 | 8 | Testing | ⬜ Not started | — | — |
@@ -25,7 +25,7 @@ This document tracks execution of the [Support Ticket Assessment Execution Plan]
 | 2 | Backend Setup | Phase 2 | ✅ `6749a01` |
 | 3 | Database Setup | Phase 3 | ✅ `1cea6ad` |
 | 4 | Ticket APIs | Phase 4 | ✅ `5900119` |
-| 5 | State Machine | Phase 5 | Pending |
+| 5 | State Machine | Phase 5 | ✅ `0871e72` |
 | 6 | Frontend UI | Phase 6 | — |
 | 7 | Frontend Integration | Phase 7 | — |
 | 8 | Tests | Phase 8 | — |
@@ -301,8 +301,8 @@ Run the API and open: **http://localhost:5172/swagger**
 - [x] Invalid transitions return 400 with detail message
 - [x] Valid transitions update status and UpdatedAt
 - [x] Solution builds successfully
-- [ ] Git commit created
-- [ ] Pushed to GitHub
+- [x] Git commit created (`0871e72`)
+- [x] Pushed to GitHub
 - [ ] User tested via Swagger
 - [ ] User confirmation received
 
