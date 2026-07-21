@@ -9,7 +9,7 @@ This document tracks execution of the [Support Ticket Assessment Execution Plan]
 | 1 | Planning | ✅ Complete | `a5abbd3` | ✅ Confirmed |
 | 2 | Backend Foundation | ✅ Complete | `6749a01` | ✅ Confirmed |
 | 3 | Database | ✅ Complete | `1cea6ad` | ✅ Confirmed |
-| 4 | Backend Features | ✅ Complete | Pending | ⏳ Awaiting |
+| 4 | Backend Features | ✅ Complete | `5900119` | ⏳ Awaiting |
 | 5 | State Machine | ⬜ Not started | — | — |
 | 6 | Frontend | ⬜ Not started | — | — |
 | 7 | Integration | ⬜ Not started | — | — |
@@ -24,7 +24,7 @@ This document tracks execution of the [Support Ticket Assessment Execution Plan]
 | 1 | Initial Planning | Phase 1 | ✅ `a5abbd3` |
 | 2 | Backend Setup | Phase 2 | ✅ `6749a01` |
 | 3 | Database Setup | Phase 3 | ✅ `1cea6ad` |
-| 4 | Ticket APIs | Phase 4 | Pending |
+| 4 | Ticket APIs | Phase 4 | ✅ `5900119` |
 | 5 | State Machine | Phase 5 | — |
 | 6 | Frontend UI | Phase 6 | — |
 | 7 | Frontend Integration | Phase 7 | — |
@@ -257,7 +257,7 @@ Build succeeded. 0 Warning(s), 0 Error(s)
 - [x] FluentValidation on write endpoints
 - [x] Validation errors return field-level details
 - [x] Solution builds successfully
-- [ ] Git commit created
+- [x] Git commit created (`5900119`)
 - [ ] Pushed to GitHub
 - [ ] User confirmation received
 
