@@ -14,7 +14,7 @@ This document tracks execution of the [Support Ticket Assessment Execution Plan]
 | — | Backend Tests (pre-frontend) | ✅ Complete | `73a571a` | ⏳ Awaiting |
 | 6 | Frontend | ✅ Complete | `f44546f` | ✅ Confirmed |
 | 7 | Integration | ✅ Complete | `aeaa20c` | ✅ Confirmed |
-| 8 | Testing | ✅ Complete | Pending | ⏳ Awaiting |
+| 8 | Testing | ✅ Complete | `40c60f7` | ⏳ Awaiting |
 | 9 | Documentation | ⬜ Not started | — | — |
 | 10 | Finalization | ⬜ Not started | — | — |
 
@@ -30,7 +30,7 @@ This document tracks execution of the [Support Ticket Assessment Execution Plan]
 | — | Tests (pre-frontend) | — | ✅ `73a571a` |
 | 6 | Frontend UI | Phase 6 | ✅ `f44546f` |
 | 7 | Frontend Integration | Phase 7 | ✅ `aeaa20c` |
-| 8 | Tests | Phase 8 | Pending |
+| 8 | Tests | Phase 8 | ✅ `40c60f7` |
 | 9 | Documentation | Phase 9 | — |
 | 10 | Final Submission | Phase 10 | — |
 
