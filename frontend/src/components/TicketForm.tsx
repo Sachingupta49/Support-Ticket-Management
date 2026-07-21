@@ -45,7 +45,7 @@ export function TicketForm({
   };
 
   return (
-    <form className="ticket-form" onSubmit={handleSubmit}>
+    <form className="ticket-form" onSubmit={handleSubmit} noValidate>
       <div className="form-group">
         <label htmlFor="title">Title *</label>
         <input

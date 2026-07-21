@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { getTickets } from '../api/tickets';
 import { ApiClientError } from '../api/client';
 import type { Ticket, TicketStatus } from '../types';
 import { ErrorAlert } from '../components/ErrorAlert';
 import { FlashMessage } from '../components/FlashMessage';
 import { LoadingSpinner } from '../components/LoadingSpinner';
+import { PageHeader } from '../components/PageHeader';
 import { TicketTable } from '../components/TicketTable';
 import { useDebounce } from '../hooks/useDebounce';
 import { STATUS_LABELS } from '../types';
@@ -52,22 +53,23 @@ export function TicketListPage() {
 
   return (
     <div className="page">
-      <div className="page-header">
-        <h1>Tickets</h1>
-        <Link to="/tickets/new" className="btn btn-primary">
-          Create Ticket
-        </Link>
-      </div>
+      <PageHeader
+        title="Tickets"
+        subtitle="Search, filter, and manage all support requests"
+      />
 
-      <div className="filters-bar">
-        <input
-          type="search"
-          placeholder="Search tickets..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="search-input"
-        />
-        <select value={status} onChange={(e) => setStatus(e.target.value)}>
+      <div className="filters-bar panel">
+        <div className="search-wrapper">
+          <span className="search-icon" aria-hidden="true">⌕</span>
+          <input
+            type="search"
+            placeholder="Search by title or description..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="search-input"
+          />
+        </div>
+        <select value={status} onChange={(e) => setStatus(e.target.value)} className="filter-select">
           {statusOptions.map((opt) => (
             <option key={opt.value} value={opt.value}>
               {opt.label}
@@ -80,14 +82,17 @@ export function TicketListPage() {
         <FlashMessage message={flashMessage} variant="error" onDismiss={() => setFlashMessage('')} />
       )}
       {error && <ErrorAlert message={error} onDismiss={() => setError('')} />}
-      {loading ? (
-        <LoadingSpinner />
-      ) : (
-        <TicketTable
-          tickets={tickets}
-          onRowClick={(ticket) => navigate(`/tickets/${ticket.id}`)}
-        />
-      )}
+
+      <section className="panel">
+        {loading ? (
+          <LoadingSpinner />
+        ) : (
+          <TicketTable
+            tickets={tickets}
+            onRowClick={(ticket) => navigate(`/tickets/${ticket.id}`)}
+          />
+        )}
+      </section>
     </div>
   );
 }

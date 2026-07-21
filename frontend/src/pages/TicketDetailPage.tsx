@@ -93,43 +93,53 @@ export function TicketDetailPage() {
   return (
     <div className="page">
       <div className="page-header">
-        <div>
-          <Link to="/tickets" className="back-link">
-            ← Back to Tickets
-          </Link>
+        <div className="page-header-text">
+          <Link to="/tickets" className="back-link">← Back to Tickets</Link>
           <h1>{ticket.title}</h1>
           <div className="ticket-meta">
             <StatusBadge status={ticket.status} />
             <PriorityBadge priority={ticket.priority} />
-            <span>Assignee: {ticket.assigneeName}</span>
+            <span className="meta-item">Assignee: <strong>{ticket.assigneeName}</strong></span>
+            <span className="meta-item">#{ticket.id}</span>
           </div>
         </div>
-        <Link to={`/tickets/${ticket.id}/edit`} className="btn btn-secondary">
-          Edit
-        </Link>
+        <div className="page-header-actions">
+          <Link to={`/tickets/${ticket.id}/edit`} className="btn btn-secondary">
+            Edit Ticket
+          </Link>
+        </div>
       </div>
 
-      <section className="section card">
-        <h2>Details</h2>
-        <p className="ticket-description">{ticket.description}</p>
-        <div className="ticket-dates">
-          <span>Created: {new Date(ticket.createdAt).toLocaleString()}</span>
-          <span>Updated: {new Date(ticket.updatedAt).toLocaleString()}</span>
+      <div className="detail-grid">
+        <section className="panel">
+          <div className="panel-header">
+            <h2>Description</h2>
+          </div>
+          <p className="ticket-description">{ticket.description}</p>
+          <div className="ticket-dates">
+            <span>Created {new Date(ticket.createdAt).toLocaleString()}</span>
+            <span>Updated {new Date(ticket.updatedAt).toLocaleString()}</span>
+          </div>
+        </section>
+
+        <section className="panel">
+          <div className="panel-header">
+            <h2>Status</h2>
+          </div>
+          {statusError && <ErrorAlert message={statusError} onDismiss={() => setStatusError('')} />}
+          <StatusSelector
+            currentStatus={ticket.status}
+            onChange={handleStatusChange}
+            disabled={statusChanging}
+          />
+        </section>
+      </div>
+
+      <section className="panel">
+        <div className="panel-header">
+          <h2>Comments</h2>
+          <span className="panel-hint">{comments.length} total</span>
         </div>
-      </section>
-
-      <section className="section card">
-        <h2>Status</h2>
-        {statusError && <ErrorAlert message={statusError} onDismiss={() => setStatusError('')} />}
-        <StatusSelector
-          currentStatus={ticket.status}
-          onChange={handleStatusChange}
-          disabled={statusChanging}
-        />
-      </section>
-
-      <section className="section card">
-        <h2>Comments</h2>
         {commentError && (
           <ErrorAlert message={commentError} onDismiss={() => setCommentError('')} />
         )}

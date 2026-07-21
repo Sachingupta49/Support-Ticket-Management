@@ -30,13 +30,7 @@ A full-stack support ticket management application built as a practical assessme
 | Frontend | ✅ Complete |
 | Integration | ✅ Complete |
 | Testing | ✅ Complete (70/70 passing) |
-| Documentation | ⬜ Pending |
-| Backend Features | ⬜ Pending |
-| State Machine | ⬜ Pending |
-| Frontend | ⬜ Pending |
-| Integration | ⬜ Pending |
-| Testing | ⬜ Pending |
-| Documentation | ⬜ Pending |
+| Documentation | ✅ Complete |
 | Finalization | ⬜ Pending |
 
 See [WORKTHROUGH.md](WORKTHROUGH.md) for detailed progress tracking.
@@ -52,6 +46,9 @@ See [WORKTHROUGH.md](WORKTHROUGH.md) for detailed progress tracking.
 | [ui-flow.md](ui-flow.md) | Page flows and components |
 | [api-contract.md](api-contract.md) | REST API specification |
 | [implementation-plan.md](implementation-plan.md) | Phased build plan |
+| [code-review-notes.md](code-review-notes.md) | Self-review findings |
+| [reflection.md](reflection.md) | Lessons learned |
+| [final-ai-usage-summary.md](final-ai-usage-summary.md) | AI tool usage summary |
 
 ## Setup Instructions
 

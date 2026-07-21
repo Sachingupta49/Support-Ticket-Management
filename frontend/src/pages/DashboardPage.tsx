@@ -1,22 +1,23 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { getDashboardSummary } from '../api/tickets';
 import { ApiClientError } from '../api/client';
 import type { DashboardSummary } from '../types';
 import { ErrorAlert } from '../components/ErrorAlert';
 import { LoadingSpinner } from '../components/LoadingSpinner';
+import { PageHeader } from '../components/PageHeader';
 import { TicketTable } from '../components/TicketTable';
 import { STATUS_LABELS } from '../types';
 import type { TicketStatus } from '../types';
 
 const statusOrder: TicketStatus[] = ['Open', 'InProgress', 'Resolved', 'Closed', 'Cancelled'];
 
-const statusCardClass: Record<TicketStatus, string> = {
-  Open: 'card-open',
-  InProgress: 'card-inprogress',
-  Resolved: 'card-resolved',
-  Closed: 'card-closed',
-  Cancelled: 'card-cancelled',
+const statusIcons: Record<TicketStatus, string> = {
+  Open: '○',
+  InProgress: '◐',
+  Resolved: '✓',
+  Closed: '■',
+  Cancelled: '×',
 };
 
 export function DashboardPage() {
@@ -40,15 +41,14 @@ export function DashboardPage() {
 
   return (
     <div className="page">
-      <div className="page-header">
-        <h1>Dashboard</h1>
-        <Link to="/tickets/new" className="btn btn-primary">
-          Create Ticket
-        </Link>
-      </div>
+      <PageHeader
+        title="Dashboard"
+        subtitle="Overview of your support ticket workload"
+      />
 
       <div className="summary-cards">
         <div className="summary-card card-total">
+          <span className="card-icon" aria-hidden="true">#</span>
           <span className="card-label">Total Tickets</span>
           <span className="card-value">{summary.totalTickets}</span>
         </div>
@@ -56,17 +56,21 @@ export function DashboardPage() {
           <button
             key={status}
             type="button"
-            className={`summary-card ${statusCardClass[status]}`}
+            className={`summary-card card-${status.toLowerCase()}`}
             onClick={() => navigate(`/tickets?status=${status}`)}
           >
+            <span className="card-icon" aria-hidden="true">{statusIcons[status]}</span>
             <span className="card-label">{STATUS_LABELS[status]}</span>
             <span className="card-value">{summary.byStatus[status] ?? 0}</span>
           </button>
         ))}
       </div>
 
-      <section className="section">
-        <h2>Recent Tickets</h2>
+      <section className="panel">
+        <div className="panel-header">
+          <h2>Recent Tickets</h2>
+          <span className="panel-hint">Last 5 updated</span>
+        </div>
         <TicketTable
           tickets={summary.recentTickets}
           onRowClick={(ticket) => navigate(`/tickets/${ticket.id}`)}

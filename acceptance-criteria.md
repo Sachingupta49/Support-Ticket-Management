@@ -55,6 +55,6 @@
 
 ## Documentation
 
-- [ ] **AC-36:** All assessment markdown files are complete
+- [x] **AC-36:** All assessment markdown files are complete
 - [x] **AC-37:** README includes setup and run instructions
 - [x] **AC-38:** AI prompt history captured in `ai-prompts/`

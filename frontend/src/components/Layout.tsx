@@ -1,4 +1,4 @@
-import { Link, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet } from 'react-router-dom';
 import { ApiStatusBanner } from './ApiStatusBanner';
 
 export function Layout() {
@@ -7,14 +7,19 @@ export function Layout() {
       <header className="app-header">
         <div className="header-content">
           <Link to="/" className="logo">
-            Support Tickets
+            <span className="logo-icon" aria-hidden="true">◆</span>
+            SupportDesk
           </Link>
-          <nav>
-            <Link to="/">Dashboard</Link>
-            <Link to="/tickets">Tickets</Link>
-            <Link to="/tickets/new" className="btn btn-primary btn-sm">
+          <nav className="main-nav">
+            <NavLink to="/" end className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
+              Dashboard
+            </NavLink>
+            <NavLink to="/tickets" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
+              Tickets
+            </NavLink>
+            <NavLink to="/tickets/new" className="btn btn-primary btn-sm nav-cta">
               + New Ticket
-            </Link>
+            </NavLink>
           </nav>
         </div>
       </header>
@@ -22,6 +27,11 @@ export function Layout() {
       <main className="app-main">
         <Outlet />
       </main>
+      <footer className="app-footer">
+        <span>Support Ticket Management System</span>
+        <span className="footer-dot">·</span>
+        <span>Assessment Project</span>
+      </footer>
     </div>
   );
 }

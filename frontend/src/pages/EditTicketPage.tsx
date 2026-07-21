@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { getTicket, getUsers, updateTicket } from '../api/tickets';
 import { ApiClientError } from '../api/client';
 import type { User } from '../types';
 import { ErrorAlert } from '../components/ErrorAlert';
 import { LoadingSpinner } from '../components/LoadingSpinner';
+import { PageHeader } from '../components/PageHeader';
 import { TicketForm } from '../components/TicketForm';
 
 export function EditTicketPage() {
@@ -66,19 +67,26 @@ export function EditTicketPage() {
   if (!initialValues) return null;
 
   return (
-    <div className="page">
-      <div className="page-header">
-        <h1>Edit Ticket</h1>
-      </div>
-      {error && <ErrorAlert message={error} fieldErrors={fieldErrors} onDismiss={() => setError('')} />}
-      <TicketForm
-        initialValues={initialValues}
-        users={users}
-        submitLabel="Save Changes"
-        onSubmit={handleSubmit}
-        onCancel={() => navigate(`/tickets/${ticketId}`)}
-        fieldErrors={fieldErrors}
+    <div className="page page-narrow">
+      <PageHeader
+        title="Edit Ticket"
+        subtitle={
+          <>
+            <Link to={`/tickets/${ticketId}`} className="back-link">← Back to ticket</Link>
+          </>
+        }
       />
+      {error && <ErrorAlert message={error} fieldErrors={fieldErrors} onDismiss={() => setError('')} />}
+      <div className="panel">
+        <TicketForm
+          initialValues={initialValues}
+          users={users}
+          submitLabel="Save Changes"
+          onSubmit={handleSubmit}
+          onCancel={() => navigate(`/tickets/${ticketId}`)}
+          fieldErrors={fieldErrors}
+        />
+      </div>
     </div>
   );
 }

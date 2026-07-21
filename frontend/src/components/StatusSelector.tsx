@@ -10,26 +10,28 @@ interface StatusSelectorProps {
 export function StatusSelector({ currentStatus, onChange, disabled }: StatusSelectorProps) {
   const allowed = ALLOWED_TRANSITIONS[currentStatus];
 
-  if (allowed.length === 0) {
-    return <p className="status-hint">No further status changes allowed.</p>;
-  }
-
   return (
     <div className="status-selector">
-      <label htmlFor="status-change">Change Status</label>
-      <div className="status-actions">
-        {allowed.map((status) => (
-          <button
-            key={status}
-            type="button"
-            className="btn btn-outline"
-            disabled={disabled}
-            onClick={() => onChange(status)}
-          >
-            → {STATUS_LABELS[status]}
-          </button>
-        ))}
-      </div>
+      <p className="status-current">
+        Current: <strong>{STATUS_LABELS[currentStatus]}</strong>
+      </p>
+      {allowed.length === 0 ? (
+        <p className="status-hint">This ticket has reached a terminal state.</p>
+      ) : (
+        <div className="status-actions">
+          {allowed.map((status) => (
+            <button
+              key={status}
+              type="button"
+              className={`btn btn-status btn-status-${status.toLowerCase()}`}
+              disabled={disabled}
+              onClick={() => onChange(status)}
+            >
+              Move to {STATUS_LABELS[status]}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
