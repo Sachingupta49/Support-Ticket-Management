@@ -11,7 +11,7 @@ This document tracks execution of the [Support Ticket Assessment Execution Plan]
 | 3 | Database | ✅ Complete | `1cea6ad` | ✅ Confirmed |
 | 4 | Backend Features | ✅ Complete | `5900119` | ✅ Confirmed |
 | 5 | State Machine | ✅ Complete | `0871e72` | ✅ Confirmed |
-| — | Backend Tests (pre-frontend) | ✅ Complete | Pending | ⏳ Awaiting |
+| — | Backend Tests (pre-frontend) | ✅ Complete | `73a571a` | ⏳ Awaiting |
 | 6 | Frontend | ⬜ Not started | — | — |
 | 7 | Integration | ⬜ Not started | — | — |
 | 8 | Testing | ⬜ Not started | — | — |
@@ -27,7 +27,7 @@ This document tracks execution of the [Support Ticket Assessment Execution Plan]
 | 3 | Database Setup | Phase 3 | ✅ `1cea6ad` |
 | 4 | Ticket APIs | Phase 4 | ✅ `5900119` |
 | 5 | State Machine | Phase 5 | ✅ `0871e72` |
-| — | Tests (pre-frontend) | — | Pending |
+| — | Tests (pre-frontend) | — | ✅ `73a571a` |
 | 6 | Frontend UI | Phase 6 | — |
 | 7 | Frontend Integration | Phase 7 | — |
 | 8 | Tests | Phase 8 | — |
@@ -355,7 +355,7 @@ dotnet test src/SupportTicket.sln
 - [x] Integration tests for state machine (AC-14 to AC-22)
 - [x] Integration tests for users and dashboard
 - [x] All 63 tests passing
-- [ ] Git commit created
+- [x] Git commit created (`73a571a`)
 - [ ] Pushed to GitHub
 - [ ] User confirmation received
 
