@@ -6,7 +6,7 @@
 | **Email** | *[Your Email]* |
 | **Assessment** | Support Ticket Management System |
 | **Date Started** | 2026-07-21 |
-| **Repository** | *[GitHub URL — to be added after remote setup]* |
+| **Repository** | https://github.com/Sachingupta49/Support-Ticket-Management.git |
 
 ## Notes
 
