@@ -27,7 +27,8 @@ A full-stack support ticket management application built as a practical assessme
 | Backend Features | ✅ Complete |
 | State Machine | ✅ Complete |
 | Backend Tests | ✅ Complete (63/63 passing) |
-| Frontend | ⬜ Pending |
+| Frontend | ✅ Complete |
+| Integration | ⬜ Pending verification |
 | Backend Features | ⬜ Pending |
 | State Machine | ⬜ Pending |
 | Frontend | ⬜ Pending |
@@ -52,7 +53,29 @@ See [WORKTHROUGH.md](WORKTHROUGH.md) for detailed progress tracking.
 
 ## Setup Instructions
 
-*Setup instructions will be added during Phase 10 (Finalization).*
+### Backend
+
+```bash
+dotnet run --project src/SupportTicket.API/SupportTicket.API.csproj --launch-profile http
+```
+
+API: http://localhost:5172 | Swagger: http://localhost:5172/swagger
+
+### Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+UI: http://localhost:5173
+
+### Tests
+
+```bash
+dotnet test src/SupportTicket.sln
+```
 
 ## License
 
